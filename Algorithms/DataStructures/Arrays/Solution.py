@@ -23,20 +23,13 @@ class Solution:
     def twoSum_2(self, nums: List[int], target: int) -> List[int]:
         i = 0
         ans = []
-        n = len(nums) - 1
-        while( i < n ):
-            j = i + 1
-            while (j < n ):
-                curr  = nums[i] + nums[j]
-                if curr == target:
-                    break
-                j += 1
-
-            if nums[i] + nums[j] == target:
-                ans.append(i)
-                ans.append(j)
-                break
-            i += 1
+        map = {}
+        for i in range(len(nums)):
+            curr = nums[i]
+            x = target - curr
+            if x in map:
+                return [map[x], i]
+            map[nums[i]] = i
         return ans
 """
 
@@ -79,10 +72,19 @@ target =
 
 """
 
+"""
+force brute
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[j] == target - nums[i]:
+                    return [i, j]
+"""
 if __name__ == "__main__":
-    num = [3,2,4]
-    target = 6
-    #num = [0,4,3,0]
-    #target = 0
+    #num = [3,2,4]
+    #target = 6
+    num = [0,4,3,0]
+    target = 0
     solution = Solution()
     print(solution.twoSum_2(num, target))
